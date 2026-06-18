@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InfuseAI - New Campaign</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(192, 193, 255, 0.1);
+        }
+        .input-glow:focus {
+            box-shadow: 0 0 15px rgba(192, 193, 255, 0.15);
+            outline: none;
+        }
+        .primary-glow {
+            box-shadow: 0 0 20px rgba(192, 193, 255, 0.2);
+        }
+        /* Custom Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #464554;
+            border-radius: 2px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #c0c1ff;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -6px;
+            box-shadow: 0 0 10px rgba(192, 193, 255, 0.5);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#222a3d",
+                    "surface-container-low": "#131b2e",
+                    "tertiary-fixed": "#ffdadb",
+                    "tertiary-container": "#ff516a",
+                    "on-tertiary": "#67001b",
+                    "secondary-fixed": "#71f8e4",
+                    "on-primary": "#1000a9",
+                    "tertiary-fixed-dim": "#ffb2b7",
+                    "error": "#ffb4ab",
+                    "on-primary-container": "#0d0096",
+                    "on-error-container": "#ffdad6",
+                    "background": "#0b1326",
+                    "on-secondary-fixed-variant": "#005048",
+                    "tertiary": "#ffb2b7",
+                    "on-tertiary-container": "#5b0017",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#2d3449",
+                    "inverse-surface": "#dae2fd",
+                    "on-primary-fixed-variant": "#2f2ebe",
+                    "surface-dim": "#0b1326",
+                    "primary-container": "#8083ff",
+                    "inverse-primary": "#494bd6",
+                    "secondary": "#4fdbc8",
+                    "surface-container": "#171f33",
+                    "surface-container-lowest": "#060e20",
+                    "on-surface-variant": "#c7c4d7",
+                    "on-secondary": "#003731",
+                    "on-surface": "#dae2fd",
+                    "secondary-container": "#04b4a2",
+                    "surface-tint": "#c0c1ff",
+                    "surface": "#0b1326",
+                    "inverse-on-surface": "#283044",
+                    "on-secondary-fixed": "#00201c",
+                    "primary-fixed-dim": "#c0c1ff",
+                    "primary": "#c0c1ff",
+                    "on-primary-fixed": "#07006c",
+                    "outline": "#908fa0",
+                    "surface-bright": "#31394d",
+                    "on-tertiary-fixed": "#40000d",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#92002a",
+                    "surface-variant": "#2d3449",
+                    "primary-fixed": "#e1e0ff",
+                    "secondary-fixed-dim": "#4fdbc8",
+                    "on-background": "#dae2fd",
+                    "on-secondary-container": "#003f38",
+                    "outline-variant": "#464554"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "lg": "40px",
+                    "base": "4px",
+                    "gutter": "20px",
+                    "container-max": "1440px",
+                    "xs": "8px",
+                    "sm": "16px",
+                    "xl": "64px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "label-caps": ["JetBrains Mono"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "data-numeral": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "display-lg-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "data-numeral": ["20px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="flex min-h-screen overflow-x-hidden">
+<!-- SideNavBar Shell -->
+<aside class="bg-surface-container-low dark:bg-surface-container-low flex flex-col h-screen sticky top-0 docked left-0 h-full w-[240px] border-r border-outline-variant z-50 shrink-0">
+<div class="px-gutter py-md">
+<div class="flex items-center gap-xs">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary leading-none">InfuseAI</h1>
+<p class="font-label-caps text-[10px] text-on-surface-variant tracking-widest mt-1 uppercase">Matching Engine</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 mt-md space-y-1">
+<a class="flex items-center gap-sm px-gutter py-sm text-primary font-bold border-r-2 border-primary bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-body-md text-body-md">Campaigns</span>
+</a>
+<a class="flex items-center gap-sm px-gutter py-sm text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">group_add</span>
+<span class="font-body-md text-body-md">Matches</span>
+</a>
+<a class="flex items-center gap-sm px-gutter py-sm text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">insert_chart</span>
+<span class="font-body-md text-body-md">Analytics</span>
+</a>
+<a class="flex items-center gap-sm px-gutter py-sm text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-md text-body-md">Briefs</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant/30 pb-md">
+<a class="flex items-center gap-sm px-gutter py-sm text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-sm px-gutter py-sm text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Support</span>
+</a>
+</div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0">
+<!-- TopAppBar Shell -->
+<header class="bg-surface/70 dark:bg-surface/70 backdrop-blur-xl flex justify-between items-center w-full h-16 px-gutter sticky top-0 z-40 border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-on-surface-variant group-focus-within:text-primary">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</span>
+<input class="bg-surface-container-highest border-none rounded-full py-2 pl-10 pr-4 w-[320px] text-body-md focus:ring-1 focus:ring-primary transition-all font-label-caps placeholder:text-on-surface-variant/50" placeholder="Search creators or campaigns..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-full active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-full active:opacity-80">
+<span class="material-symbols-outlined">history</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+<div class="flex items-center gap-xs cursor-pointer hover:bg-surface-container-highest p-1 rounded-lg transition-colors">
+<img class="w-8 h-8 rounded-full border border-primary/30" data-alt="Close-up professional portrait of a tech-focused digital marketing manager, diverse background, wearing minimalist glasses, soft studio lighting with subtle teal and indigo backlighting in a high-tech obsidian office environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnouGt6QbcZVHXHrGrVcW9kOSLZDgTuv5GR4W2k1F0yr4K88mxSrsjSwsGZp4xUDVC4sINgAH4YtspNfBMFSc99sD_ScMUpmPSSQ2x6ixP5SLnFrSvijH5kxkf0STmD1Qra_vNdZTgTxDOpxFAgwniPH4qiWmxiFTXjNOCDDyZkdUutuwtc8zahUGsftowJ4vcfWrLaP7bx1N_4xv1Tb8K3fAljce4YBZwn1Bay6dOOtq0WHRWDEOxr9jSyPHQ81_KtAvMeKygd8c"/>
+<span class="font-body-md text-body-md font-semibold text-on-surface">Alex Chen</span>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto px-gutter py-lg relative">
+<!-- Background Decoration (Atmospheric) -->
+<div class="absolute top-0 right-0 w-1/2 h-1/2 bg-primary/5 blur-[120px] -z-10 pointer-events-none rounded-full"></div>
+<div class="max-w-4xl mx-auto">
+<!-- Header & Progress -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-lg gap-md">
+<div>
+<div class="flex items-center gap-xs mb-xs">
+<span class="px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 rounded font-label-caps text-[10px] uppercase tracking-widest">Initialization</span>
+<span class="text-on-surface-variant font-label-caps text-[12px]">Step 1 of 4</span>
+</div>
+<h2 class="font-headline-md text-[32px] text-on-surface font-bold">New Campaign</h2>
+<p class="text-on-surface-variant font-body-md mt-1">Configure your brand parameters to seed the matching engine.</p>
+</div>
+<div class="flex gap-2 mb-2">
+<div class="h-1.5 w-12 bg-primary rounded-full"></div>
+<div class="h-1.5 w-12 bg-surface-container-highest rounded-full"></div>
+<div class="h-1.5 w-12 bg-surface-container-highest rounded-full"></div>
+<div class="h-1.5 w-12 bg-surface-container-highest rounded-full"></div>
+</div>
+</div>
+<!-- Form Card -->
+<div class="glass-panel rounded-xl p-md md:p-lg border border-outline-variant/50 relative overflow-hidden">
+<!-- Subtle Glow Edge -->
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+<form class="space-y-md" onsubmit="event.preventDefault();">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Left Column -->
+<div class="space-y-md">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Brand Name</label>
+<input class="w-full bg-surface-container-low border border-outline-variant text-on-surface rounded-lg py-3 px-4 font-body-md focus:border-primary input-glow transition-all" placeholder="e.g., Lumina Tech" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Campaign Objective</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low border border-outline-variant text-on-surface rounded-lg py-3 px-4 font-body-md focus:border-primary appearance-none input-glow transition-all">
+<option>Awareness</option>
+<option>Conversion</option>
+<option>Engagement</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Target Niche</label>
+<input class="w-full bg-surface-container-low border border-outline-variant text-on-surface rounded-lg py-3 px-4 font-body-md font-label-caps focus:border-primary input-glow transition-all" placeholder="e.g., Skincare, SaaS, Fintech" type="text"/>
+<div class="flex flex-wrap gap-xs mt-xs">
+<span class="px-2 py-1 bg-surface-container-highest border border-outline-variant rounded font-label-caps text-[10px] text-primary cursor-pointer hover:bg-primary/10">+ Tech</span>
+<span class="px-2 py-1 bg-surface-container-highest border border-outline-variant rounded font-label-caps text-[10px] text-primary cursor-pointer hover:bg-primary/10">+ Lifestyle</span>
+</div>
+</div>
+</div>
+<!-- Right Column -->
+<div class="space-y-md">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Audience Demographics</label>
+<input class="w-full bg-surface-container-low border border-outline-variant text-on-surface rounded-lg py-3 px-4 font-body-md focus:border-primary input-glow transition-all" placeholder="e.g., Women 18-30, Global" type="text"/>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between items-center mb-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Budget (Monthly)</label>
+<span class="font-data-numeral text-primary text-body-md">₹<span id="budget-value">125,000</span></span>
+</div>
+<div class="px-2">
+<input class="w-full h-1" id="budget-slider" max="1000000" min="10000" step="5000" type="range" value="125000"/>
+<div class="flex justify-between mt-2 text-[10px] font-label-caps text-on-surface-variant/50">
+<span>₹10K</span>
+<span>₹1M</span>
+</div>
+</div>
+</div>
+<div class="glass-panel p-sm rounded-lg bg-primary/5 border-primary/20 mt-4">
+<div class="flex gap-sm items-start">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">info</span>
+<p class="text-[12px] text-on-surface-variant leading-relaxed">
+                                            The <span class="text-primary font-bold">Matching Engine</span> will prioritize creators whose authenticity index aligns with your specific niche and budget constraints.
+                                        </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Divider -->
+<div class="h-[1px] bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent my-lg"></div>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-md">
+<button class="text-on-surface-variant font-label-caps hover:text-on-surface flex items-center gap-xs px-4 py-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                                Save as Draft
+                            </button>
+<button class="w-full sm:w-auto bg-primary text-on-primary font-bold px-xl py-3 rounded-lg flex items-center justify-center gap-sm primary-glow hover:scale-[1.02] active:scale-[0.98] transition-all" type="submit">
+<span>Analyze &amp; Match Creators</span>
+<span class="material-symbols-outlined">auto_awesome</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Auxiliary Data Visualization / Visual Interest -->
+<div class="mt-lg grid grid-cols-1 md:grid-cols-3 gap-md opacity-60">
+<div class="glass-panel p-sm rounded border border-outline-variant/20">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Engine Precision</span>
+<span class="font-data-numeral text-[14px] text-secondary">98.2%</span>
+</div>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[98.2%]"></div>
+</div>
+</div>
+<div class="glass-panel p-sm rounded border border-outline-variant/20">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Estimated Reach</span>
+<span class="font-data-numeral text-[14px] text-primary">2.4M</span>
+</div>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[65%] shadow-[0_0_8px_rgba(192,193,255,0.5)]"></div>
+</div>
+</div>
+<div class="glass-panel p-sm rounded border border-outline-variant/20">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Creator Pool</span>
+<span class="font-data-numeral text-[14px] text-tertiary">14.8K</span>
+</div>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[82%]"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        const slider = document.getElementById('budget-slider');
+        const display = document.getElementById('budget-value');
+
+        slider.addEventListener('input', (e) => {
+            const val = parseInt(e.target.value).toLocaleString();
+            display.textContent = val;
+            
+            // Visual feedback on the card
+            if(parseInt(e.target.value) > 700000) {
+                display.classList.add('text-secondary');
+                display.classList.remove('text-primary');
+            } else {
+                display.classList.add('text-primary');
+                display.classList.remove('text-secondary');
+            }
+        });
+
+        // Simple button active state simulation
+        const mainBtn = document.querySelector('button[type="submit"]');
+        mainBtn.addEventListener('mousedown', () => {
+            mainBtn.style.transform = 'scale(0.96)';
+        });
+        mainBtn.addEventListener('mouseup', () => {
+            mainBtn.style.transform = 'scale(1.02)';
+        });
+    </script>
+</body></html>

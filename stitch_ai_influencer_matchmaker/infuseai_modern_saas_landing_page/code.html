@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InfuseAI | AI-Native Influencer Discovery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#c0c1ff",
+                    "tertiary-container": "#ff516a",
+                    "surface-container-lowest": "#060e20",
+                    "error": "#ffb4ab",
+                    "surface-container-low": "#131b2e",
+                    "primary-container": "#8083ff",
+                    "on-secondary": "#003731",
+                    "on-primary": "#1000a9",
+                    "surface": "#0b1326",
+                    "on-primary-fixed": "#07006c",
+                    "on-tertiary": "#67001b",
+                    "surface-container-high": "#222a3d",
+                    "secondary-fixed-dim": "#4fdbc8",
+                    "surface-container-highest": "#2d3449",
+                    "background": "#0b1326",
+                    "outline": "#908fa0",
+                    "on-error": "#690005",
+                    "surface-tint": "#c0c1ff",
+                    "on-secondary-fixed-variant": "#005048",
+                    "on-primary-fixed-variant": "#2f2ebe",
+                    "tertiary": "#ffb2b7",
+                    "surface-container": "#171f33",
+                    "secondary-fixed": "#71f8e4",
+                    "outline-variant": "#464554",
+                    "on-tertiary-fixed": "#40000d",
+                    "tertiary-fixed-dim": "#ffb2b7",
+                    "on-background": "#dae2fd",
+                    "secondary-container": "#04b4a2",
+                    "inverse-on-surface": "#283044",
+                    "on-surface": "#dae2fd",
+                    "on-surface-variant": "#c7c4d7",
+                    "inverse-surface": "#dae2fd",
+                    "on-primary-container": "#0d0096",
+                    "on-tertiary-container": "#5b0017",
+                    "surface-variant": "#2d3449",
+                    "on-secondary-container": "#003f38",
+                    "tertiary-fixed": "#ffdadb",
+                    "surface-dim": "#0b1326",
+                    "secondary": "#4fdbc8",
+                    "inverse-primary": "#494bd6",
+                    "primary": "#c0c1ff",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#92002a",
+                    "on-secondary-fixed": "#00201c",
+                    "surface-bright": "#31394d",
+                    "error-container": "#93000a",
+                    "primary-fixed": "#e1e0ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xs": "8px",
+                    "sm": "16px",
+                    "md": "24px",
+                    "lg": "40px",
+                    "container-max": "1440px",
+                    "xl": "64px",
+                    "base": "4px",
+                    "gutter": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-caps": ["JetBrains Mono"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "data-numeral": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "data-numeral": ["20px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(192, 193, 255, 0.1);
+        }
+        .glow-indigo {
+            box-shadow: 0 0 20px rgba(192, 193, 255, 0.15);
+        }
+        .marquee {
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+            gap: 2rem;
+        }
+        .marquee-content {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-around;
+            min-width: 100%;
+            gap: 2rem;
+            animation: scroll 30s linear infinite;
+        }
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+        .mask-fade {
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="flex justify-between items-center w-full h-16 px-gutter sticky top-0 bg-surface/70 backdrop-blur-xl z-40 border-b border-outline-variant">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">hub</span>
+<span class="font-headline-md text-headline-md font-extrabold text-primary tracking-tight">InfuseAI</span>
+</div>
+<nav class="hidden md:flex gap-md">
+<a class="font-body-md text-primary font-bold" href="#">Product</a>
+<a class="font-body-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Pricing</a>
+<a class="font-body-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Enterprise</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="font-body-md text-on-surface px-sm py-xs hover:bg-surface-container-highest transition-colors rounded-full">Login</button>
+<button class="bg-primary text-on-primary font-bold px-md py-xs rounded-full hover:opacity-80 transition-all active:scale-[0.98]">Get Started</button>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative pt-xl pb-24 overflow-hidden">
+<div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+
+</div>
+<div class="container mx-auto px-gutter relative z-10">
+<div class="grid lg:grid-cols-2 gap-xl items-center">
+<div class="space-y-md">
+<div class="inline-flex items-center gap-xs px-sm py-1 rounded-full border border-primary/30 bg-primary/5">
+<span class="material-symbols-outlined text-primary text-[16px]">auto_awesome</span>
+<span class="font-label-caps text-label-caps text-primary">Engine v2.4 Now Live</span>
+</div>
+<h1 class="font-display-lg text-display-lg max-w-xl leading-[1.1]">
+                            Discover the <span class="text-primary-fixed-dim">Untapped.</span><br/>Match with the <span class="text-secondary">Authentic.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                            The AI-native engine that connects brands with creators through deep authenticity analysis and performance forecasting.
+                        </p>
+<div class="flex flex-wrap gap-sm pt-xs">
+<button class="bg-primary text-on-primary font-bold px-lg py-sm rounded-full shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">Start Matching</button>
+<button class="flex items-center gap-xs px-lg py-sm border border-outline-variant rounded-full text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">play_circle</span>
+                                Watch Demo
+                            </button>
+</div>
+</div>
+<!-- Hero Visual -->
+<div class="relative lg:h-[500px]">
+<div class="glass-panel p-md rounded-xl glow-indigo absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[440px]">
+<div class="flex items-center justify-between mb-md">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/30 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A cinematic, high-quality profile portrait of a modern lifestyle content creator in a bright urban setting. The lighting is soft and flattering, emphasizing professional production value. The image is framed with a clean, high-contrast aesthetic using the deep navy and indigo palette of the InfuseAI platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZTf8GjmRXoooaBmR0GvoZ_5oQy2Vwy2QQKJlDL5o51DBgXBx40SKuMjeUMEYa-VmlHbQ0rQEeA8wuRNS4PSEC-89Y5ckeHsOD3AngmiZtPtXzpop62X1iVVo4wQy_OuORDxGw9kfDIfrieNh1stBvr-4_hw0NvaZlLVFSLLWXEhGGheC76JySaYimKbJvNS_K2mX39RaFGRvkfeOgQaqBYfVecY7v_bsAvCQYDADLagHYD8YPVtrnSJcsoyB-Nz5d0ZKxCiheUIU"/>
+</div>
+<div>
+<h3 class="font-headline-md text-[18px] text-on-surface">Alex Rivera</h3>
+<p class="font-label-caps text-[10px] text-on-surface-variant">Tech &amp; Lifestyle • 240K Reach</p>
+</div>
+</div>
+<div class="px-xs py-1 bg-secondary/10 border border-secondary/20 rounded">
+<span class="font-label-caps text-secondary">98.2 Match</span>
+</div>
+</div>
+<div class="space-y-sm">
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-caps text-on-surface-variant">Authenticity Score</span>
+<span class="font-data-numeral text-secondary">94%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary to-primary w-[94%] relative">
+<div class="absolute right-0 top-0 bottom-0 w-4 bg-white/20 blur-sm"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-sm pt-sm">
+<div class="bg-surface-container-low p-sm rounded border border-outline-variant/30">
+<p class="font-label-caps text-[10px] text-on-surface-variant">Engagement Rate</p>
+<p class="font-data-numeral text-primary">5.2%</p>
+</div>
+<div class="bg-surface-container-low p-sm rounded border border-outline-variant/30">
+<p class="font-label-caps text-[10px] text-on-surface-variant">Estimated ROI</p>
+<p class="font-data-numeral text-tertiary">3.4x</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Social Proof -->
+<section class="py-lg border-y border-outline-variant/30 bg-surface-container-low/50">
+<div class="container mx-auto px-gutter">
+<p class="text-center font-label-caps text-on-surface-variant mb-md uppercase tracking-widest">Trusted by world-class teams</p>
+<div class="marquee mask-fade">
+<div class="marquee-content items-center">
+<span class="text-on-surface-variant font-bold text-headline-md opacity-50 grayscale">Apple</span>
+<span class="text-on-surface-variant font-bold text-headline-md opacity-50 grayscale">Tesla</span>
+<span class="text-on-surface-variant font-bold text-headline-md opacity-50 grayscale">Notion</span>
+<span class="text-on-surface-variant font-bold text-headline-md opacity-50 grayscale">Starbucks</span>
+<span class="text-on-surface-variant font-bold text-headline-md opacity-50 grayscale">Discord</span>
+<span class="text-on-surface-variant font-bold text-headline-md opacity-50 grayscale">Vercel</span>
+</div>
+<div class="marquee-content items-center">
+<span class="text-on-surface-variant font-bold text-headline-md opacity-50 grayscale">Apple</span>
+<span class="text-on-surface-variant font-bold text-headline-md opacity-50 grayscale">Tesla</span>
+<span class="text-on-surface-variant font-bold text-headline-md opacity-50 grayscale">Notion</span>
+<span class="text-on-surface-variant font-bold text-headline-md opacity-50 grayscale">Starbucks</span>
+<span class="text-on-surface-variant font-bold text-headline-md opacity-50 grayscale">Discord</span>
+<span class="text-on-surface-variant font-bold text-headline-md opacity-50 grayscale">Vercel</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Value Props -->
+<section class="py-xl container mx-auto px-gutter">
+<div class="grid md:grid-cols-3 gap-md">
+<div class="p-md bg-surface-container-low border border-outline-variant rounded-xl group hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-xl mb-sm" style="font-variation-settings: 'FILL' 1;">insights</span>
+<h3 class="font-headline-md text-on-surface mb-xs">AI-Powered Matching</h3>
+<p class="text-on-surface-variant">Vector-based discovery engine that maps creator content semantics to your brand's core values with surgical precision.</p>
+</div>
+<div class="p-md bg-surface-container-low border border-outline-variant rounded-xl group hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-secondary text-xl mb-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<h3 class="font-headline-md text-on-surface mb-xs">Authenticity Scoring</h3>
+<p class="text-on-surface-variant">Advanced bot detection and sentiment analysis that filters through the noise to find real humans with real influence.</p>
+</div>
+<div class="p-md bg-surface-container-low border border-outline-variant rounded-xl group hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-tertiary text-xl mb-sm" style="font-variation-settings: 'FILL' 1;">auto_fix_high</span>
+<h3 class="font-headline-md text-on-surface mb-xs">Automated Briefing</h3>
+<p class="text-on-surface-variant">Instant campaign strategies generated by LLMs trained on historical performance data from your specific niche.</p>
+</div>
+</div>
+</section>
+<!-- Feature Deep-Dive -->
+<section class="py-xl bg-surface-container-lowest/30 overflow-hidden">
+<div class="container mx-auto px-gutter">
+<div class="grid lg:grid-cols-2 gap-xl items-center">
+<div class="order-2 lg:order-1">
+<div class="glass-panel p-md rounded-xl relative overflow-hidden">
+<!-- Dashboard UI Mockup -->
+<div class="flex items-center gap-sm mb-lg">
+<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+<div class="h-4 w-32 bg-outline-variant/20 rounded ml-xs"></div>
+</div>
+<div class="grid grid-cols-1 gap-md">
+<div class="space-y-sm">
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-on-surface-variant">Comment Sentiment Quality</span>
+<span class="font-data-numeral text-secondary text-sm">Excellent</span>
+</div>
+<div class="grid grid-cols-7 gap-1 h-32 items-end">
+<div class="bg-secondary/40 h-[40%] rounded-t-sm"></div>
+<div class="bg-secondary/60 h-[65%] rounded-t-sm"></div>
+<div class="bg-secondary/80 h-[90%] rounded-t-sm"></div>
+<div class="bg-secondary h-[75%] rounded-t-sm"></div>
+<div class="bg-secondary/70 h-[55%] rounded-t-sm"></div>
+<div class="bg-secondary/90 h-[85%] rounded-t-sm"></div>
+<div class="bg-secondary/50 h-[45%] rounded-t-sm"></div>
+</div>
+</div>
+<div class="p-sm bg-background/50 rounded-lg border border-outline-variant/30">
+<h4 class="font-label-caps text-primary text-[10px] mb-xs">ENGINE INSIGHT</h4>
+<p class="text-sm font-body-md text-on-surface">"92% of engagement contains context-specific keywords matching the 'Luxury Tech' vertical. High conversion probability detected."</p>
+</div>
+<div class="flex gap-md">
+<div class="flex-1">
+<span class="font-label-caps text-[10px] text-on-surface-variant block mb-1">BOT PROBABILITY</span>
+<div class="flex items-center gap-sm">
+<div class="flex-1 h-1.5 bg-surface-container-highest rounded-full">
+<div class="w-[4%] h-full bg-tertiary"></div>
+</div>
+<span class="font-data-numeral text-sm">4%</span>
+</div>
+</div>
+<div class="flex-1">
+<span class="font-label-caps text-[10px] text-on-surface-variant block mb-1">AUDIENCE LOYALTY</span>
+<div class="flex items-center gap-sm">
+<div class="flex-1 h-1.5 bg-surface-container-highest rounded-full">
+<div class="w-[88%] h-full bg-primary"></div>
+</div>
+<span class="font-data-numeral text-sm">88%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2 space-y-md">
+<h2 class="font-display-lg-mobile lg:font-display-lg text-display-lg text-on-surface">Precision Authenticity Dashboard</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                            Stop guessing. Our engine performs a frame-by-frame, comment-by-comment audit of every creator in the database. 
+                        </p>
+<ul class="space-y-sm">
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<div>
+<strong class="text-on-surface">NLP Sentiment Audit</strong>
+<p class="text-on-surface-variant text-sm">Distinguishes between genuine fan praise and automated engagement pods.</p>
+</div>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<div>
+<strong class="text-on-surface">Audience Growth Anomalies</strong>
+<p class="text-on-surface-variant text-sm">Detects inorganic spikes that indicate follower purchasing or bot farm activity.</p>
+</div>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<div>
+<strong class="text-on-surface">Predictive ROI Modeling</strong>
+<p class="text-on-surface-variant text-sm">Forecasts campaign outcomes based on actual audience spending intent data.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-xl container mx-auto px-gutter text-center relative overflow-hidden rounded-3xl mb-xl">
+<div class="absolute inset-0 bg-primary/5 -z-10"></div>
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary/10 blur-[120px] rounded-full"></div>
+<div class="absolute -bottom-24 -right-24 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full"></div>
+<div class="max-w-2xl mx-auto space-y-md py-lg">
+<h2 class="font-display-lg text-display-lg text-on-surface">Ready to infuse AI into your marketing?</h2>
+<p class="font-body-lg text-on-surface-variant">Join 500+ top-tier brands using the InfuseAI engine to scale their creator partnerships with absolute certainty.</p>
+<div class="flex flex-col sm:flex-row gap-sm justify-center pt-sm">
+<button class="bg-primary text-on-primary font-bold px-xl py-md rounded-full text-lg hover:shadow-xl hover:shadow-primary/30 transition-all">Launch Campaign</button>
+<button class="bg-surface-container text-on-surface border border-outline-variant font-medium px-xl py-md rounded-full text-lg hover:bg-surface-container-high transition-all">Talk to Sales</button>
+</div>
+<p class="font-label-caps text-on-surface-variant pt-md">NO CREDIT CARD REQUIRED • 14-DAY FREE TRIAL</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant py-xl">
+<div class="container mx-auto px-gutter grid md:grid-cols-4 gap-xl">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-xs mb-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">hub</span>
+<span class="font-headline-md text-on-surface font-extrabold tracking-tight">InfuseAI</span>
+</div>
+<p class="text-on-surface-variant text-sm">Building the future of authentic brand-creator connections through neural matching systems.</p>
+</div>
+<div>
+<h4 class="font-label-caps text-on-surface mb-md">PRODUCT</h4>
+<ul class="space-y-sm text-on-surface-variant text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Matching Engine</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Authenticity Score</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Campaign Automations</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Analytics API</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-on-surface mb-md">COMPANY</h4>
+<ul class="space-y-sm text-on-surface-variant text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-on-surface mb-md">RESOURCES</h4>
+<ul class="space-y-sm text-on-surface-variant text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Documentation</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Creator Academy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">System Status</a></li>
+</ul>
+</div>
+</div>
+<div class="container mx-auto px-gutter mt-xl pt-lg border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-sm">
+<p class="text-on-surface-variant text-xs">© 2024 InfuseAI Intelligence Corp. All rights reserved.</p>
+<div class="flex gap-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">terminal</span></a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for glass panels
+        document.querySelectorAll('.glass-panel').forEach(panel => {
+            panel.addEventListener('mousemove', (e) => {
+                const rect = panel.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                panel.style.setProperty('--mouse-x', `${x}px`);
+                panel.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>
